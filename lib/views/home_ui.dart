@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 
 import '../constants/consts.dart';
@@ -35,7 +36,7 @@ class _HomeUIState extends State<HomeUI> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-          height: 150,
+          height: 180,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             // crossAxisAlignment: CrossAxisAlignment.center,
@@ -51,6 +52,7 @@ class _HomeUIState extends State<HomeUI> {
                   Text(widget.address),
                 ],
               ),
+              Gap(6),
               SingleChildScrollView(
                 padding: EdgeInsets.only(bottom: 10, top: 1),
                 scrollDirection: Axis.horizontal,
@@ -135,6 +137,7 @@ class _HomeUIState extends State<HomeUI> {
                   ],
                 ),
               ),
+              Gap(6),
               Container(
                 width: 344,
                 height: 51,
@@ -151,7 +154,18 @@ class _HomeUIState extends State<HomeUI> {
                           ),
                           hintText: "Search Food items")),
                 ),
-              )
+              ),
+              Gap(10),
+              Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    'Nearby Restaurants',
+                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
+                  ),
+                ),
+              ),
             ],
           )),
       body: ListView.builder(
@@ -161,59 +175,75 @@ class _HomeUIState extends State<HomeUI> {
           List<Restaurant> result = widget.apiResponse.data;
           return Container(
             padding: EdgeInsets.all(10),
+            margin: EdgeInsets.all(10),
             decoration: BoxDecoration(
                 color: Colors.white,
                 boxShadow: [
                   BoxShadow(
-                      offset: Offset(0, 0),
-                      blurRadius: 5,
+                      offset: Offset(0, 2),
+                      blurRadius: 10,
                       color: Color(0xffffe1e1))
                 ],
                 borderRadius: BorderRadius.circular(10)),
-            child: Column(children: [
-              Stack(
-                children: [
-                  ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      child: Image.network(result[index].primaryImage)),
-                  Positioned(
-                      bottom: 8,
-                      right: 6,
-                      child: Container(
-                          height: 20,
-                          width: 28,
-                          decoration: BoxDecoration(
-                              color: Colors.green,
-                              borderRadius: BorderRadius.circular(5)),
-                          child: Center(
-                            child: Text('${result[index].rating.toString()}',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.w700)),
-                          )))
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    result[index].name,
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
-                  ),
-                  Row(
-                    children: [
-                      // Image.asset(name),
-                      Text('${result[index].discount.toString()}% FLAT OFF',
-                          style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w700,
-                              color: Color(0xffFF0000))),
-                    ],
-                  )
-                ],
-              )
-            ]),
+            child: Column(
+              children: [
+                Stack(
+                  children: [
+                    ClipRRect(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        child: Image.network(result[index].primaryImage)),
+                    Positioned(
+                        bottom: 8,
+                        right: 6,
+                        child: Container(
+                            height: 20,
+                            width: 28,
+                            decoration: BoxDecoration(
+                                color: Colors.green,
+                                borderRadius: BorderRadius.circular(5)),
+                            child: Center(
+                              child: Text('${result[index].rating.toString()}',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.w700)),
+                            )))
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: 0, bottom: 9, left: 10),
+                      child: Text(
+                        result[index].name,
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w700),
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: 17, bottom: 10, right: 9),
+                      child: Row(
+                        children: [
+                          Image.asset(
+                            Svgs.discount,
+                            height: 20,
+                            width: 20,
+                          ),
+                          Text('${result[index].discount.toString()}% FLAT OFF',
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color(0xffFF0000))),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            ),
           );
         },
       ),

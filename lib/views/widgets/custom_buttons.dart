@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomSelector extends StatefulWidget {
   final bool forwardIcon;
@@ -74,16 +75,6 @@ class _CustomSelectorState extends State<CustomSelector> {
                     fontWeight: FontWeight.bold,
                     color: textColor)),
           ),
-          widget.forwardIcon == true
-              ? Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 0),
-                  child: Icon(
-                    Icons.arrow_forward_ios_sharp,
-                    size: 16,
-                    color: textColor,
-                  ),
-                )
-              : const SizedBox()
         ]),
       ),
     );

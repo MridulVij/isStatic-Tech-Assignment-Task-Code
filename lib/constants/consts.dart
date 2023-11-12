@@ -7,4 +7,6 @@ class Svgs {
   static const scanner = "assets/icons/scanner.svg";
   static const profile = "assets/icons/profile.svg";
   static const home = "assets/icons/home.svg";
+  static const discount = "assets/images/discount.png";
+  static const bookmark = "assets/icons/bookmark.svg";
 }
